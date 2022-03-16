@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { getEvent } from '../lib/movieService'
 
 export default function Movies(title, actor) {
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
 
   useEffect(() => {
     // setData({ title: 'Batman', actor: 'Bruce' })
     const getMovieData = async () => {
       const movies = await getEvent()
-      //   setData(movies)
+      console.log(movies)
       setData(movies)
     }
     getMovieData()
@@ -22,10 +22,12 @@ export default function Movies(title, actor) {
   //   getMovieData()
 
   return (
-    <>
-      {/* <button type="button">Hent filmer</button> */}
-      <div>{JSON.stringify(data)}</div>
-      {/* debugging JSON stringyfy */}
-    </>
+    <div>
+      <ul>
+        {data.map((movie) => (
+          <li key={movie.title}>{movie.title}</li>
+        ))}
+      </ul>
+    </div>
   )
 }

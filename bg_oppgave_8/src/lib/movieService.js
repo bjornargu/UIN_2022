@@ -25,11 +25,10 @@ const fields = `
     title,
     fullname,
     'slug': slug.current,
+    actor
     `
 
 export const getEvent = async () => {
-  const data = await client.fetch(
-    `*[_type == "movie" || _type == "actor"]{${fields}}`
-  )
+  const data = await client.fetch(`*[_type == "movie"]{${fields}}`)
   return data
 }
