@@ -26,7 +26,26 @@ const event = {
       type: 'text',
       description: 'Dette er ingressen',
     },
+    {
+      title: 'Kategori',
+      name: 'category',
+      type: 'reference',
+      to: [{ type: 'category' }],
+    },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      category: 'category.title',
+    },
+    prepare(selection) {
+      const { title, category } = selection
+      return {
+        title,
+        subtitle: `Kategori: ${category}`,
+      }
+    },
+  },
 }
 
 export default event

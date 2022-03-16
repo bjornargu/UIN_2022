@@ -1,12 +1,17 @@
-import MyComponent from './components/MyComponent'
+import { getEvents } from './utils/eventService'
 
 export default function App() {
   // Write JavaScript, use Hooks, add state and more
+  const getEventData = async () => {
+    const events = await getEvents()
+    console.log(events)
+  }
 
   return (
-    <main className="mx-auto mt-6 max-w-sm border-2 p-6">
-      <p className="text-3xl font-bold underline">Legg til JSX</p>
-      <MyComponent />
+    <main>
+      <button type="button" onClick={getEventData}>
+        Hent data
+      </button>
     </main>
   )
 }
