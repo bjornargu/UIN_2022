@@ -7,7 +7,7 @@ const actor = {
             type: 'string',
         },
         {
-            name: 'name',
+            name: 'slug',
             type: 'slug',
             valdiation: (Rule) => Rule.required(),
         }

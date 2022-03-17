@@ -1,34 +1,21 @@
 // importerer klienten:
 import client from './client'
 
-// const eventFields = `
-//   title,
-//   'slug': slug.current,
-//   preAmble,
-//   'category': category->title,
-// `
+// const fields = `
+//     title,
+//     `
 
-// export const getEvents = async () => {
-//   const data = await client.fetch(`*[_type == "event"]{${eventFields}}`)
-//   return data
-// }
+// fields kan brukes for å legge inn flere felter som parameter
 
-// export const getEvent = async (slug) => {
-//   const data = await client.fetch(
-//     `*[_type == "event" && slug.current == $slug]{${eventFields}}`,
-//     { slug }
-//   )
-//   return data
-// }
+// {${fields}} - brukes for å referere til fields som parameter
+// i GREQ spørringen
 
-const fields = `
-    title,
-    fullname,
-    'slug': slug.current,
-    actor
-    `
+export const getMovies = async () => {
+  const data = await client.fetch(`*[_type == "movie"]{title}`)
+  return data
+}
 
-export const getEvent = async () => {
-  const data = await client.fetch(`*[_type == "movie"]{${fields}}`)
+export const getActors = async () => {
+  const data = await client.fetch(`*[_type == "actor"]{fullname, slug}`)
   return data
 }
