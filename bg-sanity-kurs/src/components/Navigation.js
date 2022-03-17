@@ -10,6 +10,9 @@ export default function Navigation() {
         <li>
           <Link to="/about">Om</Link>
         </li>
+        <li>
+          <Link to="/produkter">Produkter</Link>
+        </li>
       </ul>
     </nav>
   )

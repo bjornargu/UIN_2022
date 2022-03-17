@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { products } from '../data/products'
 
 export default function Products() {
@@ -10,7 +10,6 @@ export default function Products() {
           <Link to={`${product.id}`}>Gå til produkt</Link>
         </article>
       ))}
-      <Outlet />
     </section>
   )
 }

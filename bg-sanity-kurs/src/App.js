@@ -5,6 +5,9 @@ import About from './components/About'
 import Navigation from './components/Navigation'
 import Layout from './components/Layout'
 import NoMatch from './components/NoMatch'
+import Products from './components/Products'
+import Product from './components/Product'
+import ProductEdit from './components/ProductEdit'
 
 export default function App() {
   // Write JavaScript, use Hooks, add state and more
@@ -26,6 +29,11 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/hjem" element={<Home />} />
+          <Route path="/produkter">
+            <Route index element={<Products />} />
+            <Route path=":id" element={<Product />} />
+            <Route path=":id/edit" element={<ProductEdit />} />
+          </Route>
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
