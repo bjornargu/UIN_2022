@@ -10,12 +10,16 @@ import client from './client'
 // {${fields}} - brukes for å referere til fields som parameter
 // i GREQ spørringen
 
+// hente actor via referanse: 'movie': actor -> fullname
+
 export const getMovies = async () => {
-  const data = await client.fetch(`*[_type == "movie"]{title}`)
+  const data = await client.fetch(
+    `*[_type == "movie"]{title, 'movie': actor -> fullname}`
+  )
   return data
 }
 
-export const getActors = async () => {
-  const data = await client.fetch(`*[_type == "actor"]{fullname, slug}`)
+export const getSlug = async () => {
+  const data = await client.fetch(`*[_type == "actor"]{slug}`)
   return data
 }
