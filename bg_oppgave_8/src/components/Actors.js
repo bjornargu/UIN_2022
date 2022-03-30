@@ -1,37 +1,26 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getSlug, getMovies } from '../lib/movieService'
+import { getActors } from '../lib/movieService'
 
 export default function Actors() {
-  const [slugState, setSlugState] = useState([])
-  const [movieState, setMovieState] = useState([])
+  const [data, setData] = useState()
 
   useEffect(() => {
-    const getSlugData = async () => {
-      const slugs = await getSlug()
-      setSlugState(slugs)
+    const getActorData = async () => {
+      const actor = await getActors()
+      setData(actor)
     }
-    getSlugData()
+    getActorData()
   }, [])
-
-  useEffect(() => {
-    const getMovieData = async () => {
-      const movies = await getMovies()
-      setMovieState(movies)
-    }
-    getMovieData()
-    // console.log(movieState)
-  }, [])
-  console.log(slugState)
 
   return (
     <>
       <h1>Actors:</h1>
       <ul>
-        {movieState.map((actor) => (
-          <li key={actor.movie}>
-            <Link to={`${slugs.slug.current}`}>{actor.movie}</Link>
-          </li>
+        {data?.map((actor) => (
+          <li key={actor.fullname}>
+            <Link to={`${actor.slug}`}>{actor.fullname}</Link>
+            </li>
         ))}
       </ul>
     </>

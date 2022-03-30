@@ -5,10 +5,8 @@ export default function Movies(title, actor) {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    // setData({ title: 'Batman', actor: 'Bruce' })
     const getMovieData = async () => {
       const movies = await getMovies()
-      // console.log(movies)
       setData(movies)
     }
     getMovieData()

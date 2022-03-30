@@ -1,25 +1,32 @@
 // importerer klienten:
 import client from './client'
 
-// const fields = `
-//     title,
-//     `
+const movieFields = `
+    title,
+    "actor": actor -> {fullname, "slug": slug.current}
+    `
 
-// fields kan brukes for å legge inn flere felter som parameter
+const actorFields = `
+fullname,
+"slug": slug.current
+`
 
-// {${fields}} - brukes for å referere til fields som parameter
-// i GREQ spørringen
-
-// hente actor via referanse: 'movie': actor -> fullname
+// const moviesByActorFields = `
 
 export const getMovies = async () => {
-  const data = await client.fetch(
-    `*[_type == "movie"]{title, 'movie': actor -> fullname}`
-  )
+  const data = await client.fetch(`*[_type == "movie"]{${movieFields}}`)
   return data
 }
 
-export const getSlug = async () => {
-  const data = await client.fetch(`*[_type == "actor"]{slug}`)
+export const getActors = async () => {
+  const data = await client.fetch(`*[_type == "actor"]{${actorFields}}`)
+  return data
+}
+
+export async function getMoviesByActor(actor) {
+  const data = await client.fetch(
+    `*[_type == "movie" && actor->slug.current==$actor]{${movieFields}}`,
+    { actor }
+  )
   return data
 }

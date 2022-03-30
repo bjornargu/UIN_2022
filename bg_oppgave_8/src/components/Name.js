@@ -1,20 +1,35 @@
-// import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { getMovies } from '../lib/movieService'
+import { getActors, getMoviesByActor } from '../lib/movieService'
 // import { getActors } from '../lib/movieService'
 
 export default function Name() {
-  //   const [data, setData] = useState([])
+  const [actorData, setActorData] = useState()
+  const [data, setData] = useState()
   const { name } = useParams()
-  const actorList = getMovies()
-  console.log(actorList)
-  const actor = actorList?.map((actors) => actors.movie === name)
-  // console.log(getMovies())
+
+  useEffect(() => {
+    const getActorData = async () => {
+      const actor = await getActors()
+      setActorData(actor)
+    }
+    getActorData()
+    const getMoviesByActorData = async () => {
+      const info = await getMoviesByActor(name)
+      setData(info)
+    }
+    getMoviesByActorData()
+  }, [])
+
+
+  const currentActor = actorData?.find((actors) => actors.slug === name)
+  console.log(data)
+  // Får opp ønsket resultat fra denne console log'en, men får ikke skrevet det inn i p-taggen under
 
   return (
     <article>
-      <h1>Actorname</h1>
-      <p>Information about the actor</p>
+      <h1>{currentActor?.fullname}</h1>
+      <p>Acts in: {data?.title}</p> 
     </article>
   )
 }
